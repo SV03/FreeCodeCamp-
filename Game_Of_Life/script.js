@@ -20,11 +20,29 @@ app.controller('gameOfLifeCtrl', function($scope, $interval){
     // generate seeds
     var randomSeeds = function(){
       for(var i=0; i<(rowMax*colMax/2); i++){
-        var row =Math.floor(Math.random()*(rowMax 1));
-        var col =Math.floor(Math.random()*(colMax 1));
+        var row =Math.floor(Math.random()*(rowMax - 1));
+        var col =Math.floor(Math.random()*(colMax - 1));
         $scope.activate(row,col);
 
       }
     }
+
+    //count live neighbours
+    var checkNeighbours = function(row, col){
+      var count = 0;
+      for(var i=row-1; i<row+1; i++){
+        for(var j=col-1; j<col+1; j++){
+          if((i!=row || j!=col) && ($scope.rows[i]) && ($scope.rows[i].cols[j])){
+            if($scope.rows[i].col[j].active >=1){
+              count++;
+            }
+          }
+        }
+      }
+      return count;
+    }
+
+
+
    
 })
