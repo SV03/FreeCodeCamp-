@@ -42,7 +42,49 @@ app.controller('gameOfLifeCtrl', function($scope, $interval){
       return count;
     }
 
+    //stop
+    $scope.stop = funtion(){
+      $interval.cancel(interval);
+    }
+    //activate-start
+    $scope.activate = function(row,col){
+      $scope.rows[row].cols[col].active = 1;
+    }
 
+    //start
+    var interval;
+    $scope.start = fucntion(random){
+      $scope.gerneration = 0;
+      if(random){
+        randomSeeds();
+      }
 
-   
+      interval = $interval(fucntion(){
+        $scope.gerneration++;
+        for (var i=0; i<rowMax; i++){
+          for (var j=0; j<colMax; j++){
+            var noOfNeighbours = checkNeighbours(i,j);
+            $scope.rows[i].cols[j].neighbours = noOfNeighbours;
+          }
+        }
+        for(var i=0; i<rowMax; i++ ){
+          for (var j=0; j<colMax; j++){
+            if($scope.rows[i].cols[j].active >= 1){
+              if($scope.rows[i].cols[j].neighbours >=4 || $scope.rows[i].cols[j].neighbours <=4 ){
+                $scope.rows[i].cols[j].active =0;
+              }else {
+                $scope.rows[i].cols[j].active++ ;
+              }else {
+                if($scope.rows[i].cols[j].neighbours ==3){
+                  $scope.rows[i].cols[j].active = 1;
+                }
+              }
+            }
+          }
+        }, 100)
+
+      })
+
+    }
+
 })
