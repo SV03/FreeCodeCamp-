@@ -81,10 +81,18 @@ app.controller('gameOfLifeCtrl', function($scope, $interval){
               }
             }
           }
-        }, 100)
+        }, 100);
+      }
 
-      })
+      $scope.start(true);
 
-    }
+      $scope.clear =function(){
+        for(var i=0; i<rowMax; i++){
+          for(var j =0; j<colMax; j++){
+            $scope.rows[i].cols[j].active =0;
+          }
+        }
+      }
+
 
 })
