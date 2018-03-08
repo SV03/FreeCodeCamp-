@@ -1,18 +1,40 @@
-<<div ng-app="gameOfLifeApp" ng-controller="gameOfLifeCtrl">
-  <<table>
-    <<tr ng-repeat="row in rows">
-      <<td ng-click="activate(rows.indexOf(row), $index)
-                      ng-repeat= col in row.cols"
+
+<html>
+<head>
+
+<meta charset="UTF-8">
+	<title>Game Of Life made in AngularJS</title>
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div ng-app="gameOfLifeApp" ng-controller="gameOfLifeCtrl">
+
+  <h3 style="text-align: center">Game Of Life</h3>
+
+  <table>
+    <tr ng-repeat='row in rows'>
+      <td ng-click=activate(rows.indexOf(row),$index)
+            ng-repeat='col in row.cols'
             ng-class="{'born':col.active==1, 'old':col.active>1}">
-      </td>>
-    </tr>>
-  </table>>
+    </tr>
+  </table>
 
-  <<div>
-    <<button ng-click="stop()">Stop</button>>
-    <<button ng-click="stop(false)">Start</button>>
-    <<button ng-click="clear()">Clear</button>>
-    Gerneration {{gerneration}}
-  </div>>
+  <div class="components">
+    <button ng-click="stopGame();">Stop</button>
+    <button ng-click="startGame(false);">Start</button>
+    <button ng-click="clear();">Clear</button>
+    Generation {{generation}}
+  </div>
 
-</div>>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js'></script>
+
+<script src="script.js"></script>
+
+
+</body>
+</html>
